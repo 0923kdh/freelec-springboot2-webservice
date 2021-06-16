@@ -4,6 +4,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/*
+1. Dto Class 는 Request 데이터를 받는다.
+*/
+
 @Getter
 @NoArgsConstructor
 public class PostsUpdateRequestDto {
