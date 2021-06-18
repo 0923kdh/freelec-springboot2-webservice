@@ -2,6 +2,7 @@ package com.jojoldu.book.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 /*
 1. @SpringBootApplication
@@ -16,8 +17,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  1) 내장 WAS를 실행한다.
     * 내장 WAS란 별도로 외부에 WAS를 두지 않고 애플리케이션을 실행할때 내부에서 WAS를 실행하는 것을 이야기함.
       항상 서버에 톰캣 설치가 필요 없고 스프링 부트로 만들어진 Jar 파일(실행 가능한 Java 패키징 파일)로 실행하면 된다.
-*/
 
+3. @EnableJpaAuditing
+ 1) JPA Auditing 어노테이션들을 모두 활성화할 수 있도록 하는 어노테이션
+*/
+@EnableJpaAuditing
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {
