@@ -1,7 +1,12 @@
 package com.jojoldu.book.springboot.web;
 
+import com.jojoldu.book.springboot.config.auth.dto.SessionUser;
+import com.jojoldu.book.springboot.service.PostsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import javax.servlet.http.HttpSession;
 
 /*
 머스테치 스타터 컨트롤러에서 문자열을 반환할 때 앞의 경로와 뒤의 파일 확장자는 자동으로 지정함.
@@ -10,16 +15,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 View Resolver가 처리하게 된다.
 */
 
+@RequiredArgsConstructor
 @Controller
 public class IndexController {
 
-    @GetMapping("/")
-    public String index() {
+    private final PostsService postsService;
+    private final HttpSession httpSession;
+
+    public String index(Model model) {
+        model.addAttribute("posts", postsService.findAllDesc());
+
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
+
         return "index";
     }
 
     @GetMapping("/posts/save")
-    public String postsSave() {
-        return "posts-save";
-    }
+    public String postsSave() { return "posts-save"; }
 }
